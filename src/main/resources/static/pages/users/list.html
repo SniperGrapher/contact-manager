@@ -1,0 +1,74 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-2.dtd">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml"
+>
+
+<head>
+    <title>Contact Manager :: Users</title>
+</head>
+<body>
+<div id="contactManagerApp" class="container">
+    <hr/>
+    <pre class="h4" th:text="#{search_label}">Search info</pre>
+    <div ng-controller="mainController as mainCtrl" class="panel">
+        <div class="panel-body">
+            <form class="form-inline">
+                <div class="form-group">
+                    <label class="sr-only" for="search" th:text="#{page.search}">Search</label>
+                    <input type="search" ng-model="query" class="form-control" id="search" placeholder="Search..."
+                           ng-change="search()"/>
+                </div>
+                <div class="form-group">
+                    <label class="sr-only" for="size" th:text="#{page.size}">size</label>
+                    <input type="number" class="form-control" id="size" ng-model="data.numOfUsers"
+                           ng-change="updateView();" placeholder="Size"
+                           min="1" max="100"/>
+                </div>
+            </form>
+        </div>
+
+        <div id="center-content-area" ng-hide="showTable" class="panel-body">
+            <table class="table  table-hover data-table sort display">
+                <thead>
+                <tr>
+                    <th class="name"><a href="" ng-click="columnToOrder='firstName';reverse=!reverse" th:text="#{name}">Name</a>
+                    </th>
+                    <th class="phone_number"><a href="" ng-click="columnToOrder='phoneNumber';reverse=!reverse"
+                                                th:text="#{email}">Email</a></th>
+                    <th class="serial_number"><a href="" ng-click="columnToOrder='msisdnSerial';reverse=!reverse"
+                                                 th:text="#{phoneNumber}">Phone Number</a></th>
+                    <th class="reg_date"><a href="" ng-click="columnToOrder='registrationDate';reverse=!reverse"
+                                            th:text="#{registration_date}">Registration Date</a></th>
+                    <th class="actions"><a href="" ng-click="columnToOrder='Action';reverse=!reverse"
+                                           th:text="#{actions}">Actions</a></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="item in data.viewUsers" ng-click="showDetails(item.id)">
+                    <td>{{item.firstName}} {{item.lastName}}</td>
+                    <td>{{item.email}}</td>
+                    <td>{{item.phoneNumber}}</td>
+                    <td>{{item.receiptTimeStamp | date:'EEE, d MMM yyyy'}}</td>
+                    <td>
+                        <a ng-click="showDetails(item.id)" href="javascript:">
+                            <button class="btn btn-info btn-xs"><i class="fa fa-external-link"> </i> Details</button>
+                        </a>
+                    </td>
+
+                </tr>
+                </tbody>
+            </table>
+            <uib-pagination total-items="data.totalItems" ng-model="data.currentPage" max-size="data.maxSize"
+                            class="pagination-sm"
+                            boundary-links="true"
+                            num-pages="data.numOfPages"
+                            ng-change="updateView()"></uib-pagination>
+        </div>
+        <p>
+            <button ng-click="userForm()" class="col-md-off-set-1 btn btn-info" th:text="#{user.add.new}">Add New User
+            </button>
+        </p>
+    </div>
+</div>
+</body>
+</html>

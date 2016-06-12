@@ -1,0 +1,1 @@
+angular.bootstrap(document.getElementById(contactManagerApp), [contactManagerApp]);

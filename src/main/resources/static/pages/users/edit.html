@@ -1,0 +1,126 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-2.dtd">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml"
+>
+
+<head>
+    <title>Contact Manager :: Edit Profile</title>
+</head>
+<body>
+<div id="contactManagerApp" class="container">
+    <div ng-controller="editUserController as ctrl" class="panel">
+        <div class="span-12 col-sm-12">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h2 th:text="#{page.edit.text}">Add new Contact Information</h2>
+                </div>
+                <div class="panel-body" ng-if="ctrl.user != null">
+                    <div>
+                        <form class="form-horizontal" name="userForm" ng-submit="ctrl.submit()" method="post"
+                              novalidate="true">
+                            <input type="hidden" ng-model="ctrl.user.id"/>
+                            <input type="hidden" ng-model="ctrl.user.version"/>
+
+                            <div class=" form-group">
+                                <label th:text="#{first_name}" for="firstName" class="col-sm-2 control-label">First
+                                    name</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" placeholder="First name" name="firstName"
+                                           id="firstName"
+                                           ng-model="ctrl.user.firstName" required="true" ng-minlength="3"
+                                           data-validation-required-message="Please enter your first name."/>
+                                    <div class="has-error help-block text-danger" ng-show="userForm.$dirty">
+                                        <span ng-show="userForm.firstName.$error.required">This is a required field</span>
+                                        <span ng-show="userForm.firstName.$error.minlength">Minimum length required is 3</span>
+                                        <span ng-show="userForm.firstName.$invalid">This field is invalid </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class=" form-group">
+                                <label th:text="#{surname}" for="lastName" class="col-sm-2 control-label">Last
+                                    name</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" placeholder="Last name" name="lastName"
+                                           id="lastName" required="true"
+                                           ng-model="ctrl.user.lastName" ng-minlength="3"
+                                           data-validation-required-message="Please enter your Last name."/>
+                                    <div class="has-error help-block text-danger" ng-show="userForm.$dirty">
+                                        <span ng-show="userForm.lastName.$error.required">This is a required field</span>
+                                        <span ng-show="userForm.lastName.$error.minlength">Minimum length required is 3</span>
+                                        <span ng-show="userForm.lastName.$invalid">This field is invalid </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class=" form-group">
+                                <label th:text="#{gender}" for="gender" class="col-sm-2 control-label">Gender</label>
+                                <div class="radio col-sm-10" id="gender">
+                                    <label>
+                                        <input type="radio" ng-model="ctrl.user.gender" name="gender" id="female"
+                                               value="Female" checked>Female
+                                    </label>
+                                    <label>
+                                        <input type="radio" ng-model="ctrl.user.gender" name="gender" id="male"
+                                               value="Male">Male
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class=" form-group">
+                                <label th:text="#{email}" for="email" class="col-sm-2 control-label">Email
+                                    Address</label>
+                                <div class="col-sm-10">
+                                    <input type="email" class="form-control" placeholder="Email Address" name="email"
+                                           ng-model="ctrl.user.email" id="email" required="true"
+                                           data-validation-required-message="Please enter your email address."/>
+                                    <div class="has-error help-block text-danger" ng-show="userForm.$dirty">
+                                        <span ng-show="userForm.email.$error.required">This is a required field</span>
+                                        <span ng-show="userForm.email.$invalid">Email is invalid </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class=" form-group">
+                                <label th:text="#{phoneNumber}" for="phoneNumber" class="col-sm-2 control-label">Phone
+                                    Number</label>
+                                <div class="col-sm-10">
+                                    <input type="tel" class="form-control" placeholder="Phone Number" id="phoneNumber"
+                                           ng-model="ctrl.user.phoneNumber" name="phoneNumber"/>
+                                    <div class="has-error help-block text-danger" ng-show="userForm.$dirty">
+                                        <span ng-show="userForm.phoneNumber.$error.required">This is a required field</span>
+                                        <span ng-show="userForm.phoneNumber.$error.minlength">Minimum length required is 10</span>
+                                        <span ng-show="userForm.phoneNumber.$invalid">This field is invalid </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class=" form-group">
+                                <label th:text="#{address}" for="address" class="col-sm-2 control-label">Address</label>
+                                <div class="col-sm-10">
+                                    <input type="tel" class="form-control" placeholder="Permanent home address "
+                                           id="address"
+                                           ng-model="ctrl.user.address" name="address"/>
+                                </div>
+                            </div>
+                            <br/>
+                            <div id="success"></div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-10"><input type="submit"
+                                                                              value="{{!ctrl.user.id ? 'Add' : 'Update'}}"
+                                                                              class="btn btn-primary btn-sm"
+                                                                              ng-disabled="userForm.$invalid">
+                                    <button type="button" ng-click="ctrl.reset()" class="btn btn-warning btn-sm"
+                                            ng-disabled="userForm.$pristine">Reset Form
+                                    </button>
+                                    <button type="button" class="btn btn-info" ng-click="ctrl.back()"
+                                            th:text="#{back_button}">Back to List
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>
