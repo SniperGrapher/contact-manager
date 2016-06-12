@@ -48,7 +48,7 @@
                     <td>{{item.firstName}} {{item.lastName}}</td>
                     <td>{{item.email}}</td>
                     <td>{{item.phoneNumber}}</td>
-                    <td>{{item.receiptTimeStamp | date:'EEE, d MMM yyyy'}}</td>
+                    <td>{{item.dateInformation | date:'EEE, d MMM yyyy'}}</td>
                     <td>
                         <a ng-click="showDetails(item.id)" href="javascript:">
                             <button class="btn btn-info btn-xs"><i class="fa fa-external-link"> </i> Details</button>

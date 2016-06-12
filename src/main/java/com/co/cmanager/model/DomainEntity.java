@@ -60,8 +60,7 @@ public class DomainEntity implements Serializable {
         this.lastUpdatedDate = lastUpdatedDate;
     }
 
-
-    public String dateInformation() {
+    public String getDateInformation() {
         return createdDate.format(DateTimeFormatter.ISO_DATE_TIME);
     }
 }

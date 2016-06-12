@@ -32,7 +32,6 @@ angular.module(contactManagerApp + '.controllers')
                     $scope.data.totalItems = response.totalElements;
                 });
             }
-
             $scope.search = function () {
                 searchData();
             };
@@ -76,7 +75,6 @@ angular.module(contactManagerApp + '.controllers')
                         $scope.UserDetails.user = response.data;
                         console.log(response);
                     });
-                window.location.reload();
                 $location.path('/users/' + id);
             }
         }])
@@ -91,11 +89,12 @@ angular.module(contactManagerApp + '.controllers')
                         $scope.user = response.data;
                         console.log(response);
                     });
-            }
+            };
 
             this.back = function () {
                 $location.path('/users')
             };
+
             this.delete = function (id) {
                 console.log('id to be deleted', id);
                 userService.deleteUser(id).then(
@@ -118,7 +117,6 @@ angular.module(contactManagerApp + '.controllers')
         }])
 
     .controller('editUserController', ['$scope', '$route', '$location', 'userService', 'UserDetails', function ($scope, $route, $location, userService, UserDetails) {
-
         var self = this;
         self.user = {
             id: null,
@@ -152,6 +150,7 @@ angular.module(contactManagerApp + '.controllers')
                     console.error(errResponse + 'Error while creating User.');
                 }
             );
+            window.location.reload();
         };
         self.edit = function (id) {
             console.log('id to be edited', id);
